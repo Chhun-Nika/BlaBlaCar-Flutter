@@ -6,14 +6,15 @@ import 'screens/ride_pref/ride_pref_screen.dart';
 import 'theme/theme.dart';
 
 void main() {
-  runApp(const MyApp());
-  // Location dijon = Location(country: Country.france, name: "Dijon");
+  // runApp(const MyApp());
+  Location dijon = Location(country: Country.france, name: "Dijon");
 
-  // List<Ride> filteredRide = RidesService.filterBy();
+  List<Ride> filteredRide = RidesService.filterBy();
 
-  // for (Ride ride in filteredRide) {
-  //   print(ride);
-  // }
+
+  for (Ride ride in filteredRide) {
+    print(ride);
+  }
 }
 
 class MyApp extends StatelessWidget {
