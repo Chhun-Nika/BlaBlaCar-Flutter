@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 import '../dummy_data/dummy_data.dart';
 import '../model/ride/locations.dart';
 import '../model/ride/ride.dart';
