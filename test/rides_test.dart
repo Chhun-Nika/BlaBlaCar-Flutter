@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:blabla/model/ride/locations.dart';
 import 'package:blabla/model/ride/ride.dart';
