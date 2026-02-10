@@ -15,7 +15,7 @@ class RidesService {
 
     List<Ride> result = [];
     for (Ride ride in rides) {
-      if (ride.arrivalLocation == departure) {
+      if (ride.departureLocation == departure) {
         result.add(ride);
       }
     }
