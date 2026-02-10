@@ -1,10 +1,11 @@
+import 'package:blabla/widgets/inputs/ride_form.dart';
 import 'package:flutter/material.dart';
 
 import '../../model/ride_pref/ride_pref.dart';
 import '../../service/ride_prefs_service.dart';
 import '../../theme/theme.dart';
 
-import 'widgets/ride_pref_form.dart';
+// import 'widgets/ride_pref_form.dart';
 import 'widgets/ride_pref_history_tile.dart';
 
 const String blablaHomeImagePath = 'assets/images/blabla_home.png';
@@ -59,38 +60,20 @@ class _RidePrefScreenState extends State<RidePrefScreen> {
           style: BlaTextStyles.heading.copyWith(color: Colors.white),
         ),
         SizedBox(height: 100),
-        Container(
-          margin: EdgeInsets.symmetric(horizontal: BlaSpacings.xxl),
-          decoration: BoxDecoration(
-            color: Colors.white, // White background
-            borderRadius: BorderRadius.circular(16), // Rounded corners
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              // 2.1 Display the Form to input the ride preferences
-              RidePrefForm(initRidePref: RidePrefService.currentRidePref),
-              SizedBox(height: BlaSpacings.m),
-
-              // 2.2 Optionally display a list of past preferences
-              SizedBox(
-                height: 200, // Set a fixed height
-                child: ListView.builder(
-                  shrinkWrap: true, // Fix ListView height issue
-                  physics: AlwaysScrollableScrollPhysics(),
-                  itemCount: RidePrefService.ridePrefsHistory.length,
-                  itemBuilder: (ctx, index) => RidePrefHistoryTile(
-                    ridePref: RidePrefService.ridePrefsHistory[index],
-                    onTap: () {
-                      onRidePrefSelected(
-                        RidePrefService.ridePrefsHistory[index],
-                      );
-                    },
-                  ),
-                ),
-              ),
-            ],
+        RideForm(),
+        SizedBox(height: BlaSpacings.m),
+        Expanded(
+          child: ListView.builder(
+            padding: EdgeInsets.only(bottom: 40),
+            shrinkWrap: true, // Fix ListView height issue
+            physics: AlwaysScrollableScrollPhysics(),
+            itemCount: RidePrefService.ridePrefsHistory.length,
+            itemBuilder: (ctx, index) => RidePrefHistoryTile(
+              ridePref: RidePrefService.ridePrefsHistory[index],
+              onTap: () {
+                onRidePrefSelected(RidePrefService.ridePrefsHistory[index]);
+              },
+            ),
           ),
         ),
       ],

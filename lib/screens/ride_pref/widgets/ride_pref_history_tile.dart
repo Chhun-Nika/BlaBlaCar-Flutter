@@ -19,12 +19,15 @@ class RidePrefHistoryTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      onTap: onTap,
-      title: Text(title, style: BlaTextStyles.body.copyWith(color: BlaColors.textNormal)),
-      subtitle: Text(subTitle, style: BlaTextStyles.label.copyWith(color: BlaColors.textLight)),
-      leading: Icon(Icons.history, color: BlaColors.iconLight,),
-      trailing: Icon(Icons.arrow_forward_ios, color: BlaColors.iconLight, size: 16,),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: BlaSpacings.m),
+      child: ListTile(
+        onTap: onTap,
+        title: Text(title, style: BlaTextStyles.body.copyWith(color: BlaColors.textNormal)),
+        subtitle: Text(subTitle, style: BlaTextStyles.label.copyWith(color: BlaColors.textLight)),
+        leading: Icon(Icons.history, color: BlaColors.iconLight,),
+        trailing: Icon(Icons.arrow_forward_ios, color: BlaColors.iconLight, size: 16,),
+      ),
     );
   }
 }
