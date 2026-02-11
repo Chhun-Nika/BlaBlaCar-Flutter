@@ -7,11 +7,13 @@ import 'package:flutter/material.dart';
 import '../../model/ride/locations.dart';
 import 'date_picker.dart';
 
-class RideForm extends StatefulWidget {
+class RideForm extends StatelessWidget {
   final Location? departureLocation;
   final Location? arrivalLocation;
   final DateTime date;
   final int requestedSeat;
+  final VoidCallback onDepartureTap;
+  final VoidCallback onArrivalTap;
 
   RideForm({
     super.key,
@@ -19,59 +21,13 @@ class RideForm extends StatefulWidget {
     this.arrivalLocation,
     DateTime? date,
     int? requestedSeat,
+    required this.onDepartureTap,
+    required this.onArrivalTap,
   }) : date = date ?? DateTime.now(),
        requestedSeat = requestedSeat ?? 1;
 
   @override
-  State<RideForm> createState() => _RideFormState();
-}
-
-class _RideFormState extends State<RideForm> {
-  @override
   Widget build(BuildContext context) {
-    //   return Container(
-    //     margin: EdgeInsets.symmetric(horizontal: BlaSpacings.xl),
-    //     decoration: BoxDecoration(
-    //       borderRadius: BorderRadius.circular(16),
-    //       color: BlaColors.white,
-    //       boxShadow: [
-    //         BoxShadow(
-    //           color: BlaColors.greyLight,
-    //           spreadRadius: -1,
-    //           blurRadius: 3,
-    //           offset: const Offset(0, 3),
-    //         ),
-    //       ],
-    //     ),
-    //     padding: EdgeInsets.symmetric(
-    //       horizontal: BlaSpacings.l,
-    //       vertical: BlaSpacings.s,
-    //     ),
-    //     child: Column(
-    //       children: [
-    //         Container(
-    //           child: Column(
-    //             mainAxisAlignment: MainAxisAlignment.center,
-    //             crossAxisAlignment: CrossAxisAlignment.stretch,
-    //             children: [
-    //               LocationPicker(label: "Leaving from"),
-    //               BlaDivider(),
-    //               LocationPicker(label: "Going to"),
-    //               BlaDivider(),
-    //               DatePicker(date: widget.date),
-    //               BlaDivider(),
-    //               RequestedSeatInput(requestedSeat: widget.requestedSeat),
-    //             ],
-    //           ),
-    //         ),
-    //         BlaButton(
-    //           onClicked: () {},
-    //           buttonLabel: "Search",
-    //           buttonType: ButtonType.primary,
-    //         ),
-    //       ],
-    //     ),
-    //   );
     return Container(
       clipBehavior: Clip.hardEdge,
       padding: EdgeInsets.all(0),
@@ -92,22 +48,18 @@ class _RideFormState extends State<RideForm> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Container(
-            // padding: EdgeInsets.symmetric(
-            //   horizontal: BlaSpacings.l,
-            //   vertical: BlaSpacings.s,
-            // ),
             padding: EdgeInsets.only(top: BlaSpacings.s, left: BlaSpacings.l, right: BlaSpacings.l),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                LocationPicker(label: "Leaving from"),
+                LocationPicker(label: "Leaving from", onTap: onDepartureTap, selectedLocation: departureLocation,),
                 BlaDivider(),
-                LocationPicker(label: "Going to"),
+                LocationPicker(label: "Going to", onTap: onArrivalTap, selectedLocation: arrivalLocation,),
                 BlaDivider(),
-                DatePicker(date: widget.date),
+                DatePicker(date: date),
                 BlaDivider(),
-                RequestedSeatInput(requestedSeat: widget.requestedSeat),
+                RequestedSeatInput(requestedSeat: requestedSeat),
               ],
             ),
           ),

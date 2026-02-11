@@ -1,6 +1,8 @@
+import 'package:blabla/screens/location/location_search_screen.dart';
 import 'package:blabla/widgets/inputs/ride_form.dart';
 import 'package:flutter/material.dart';
 
+import '../../model/ride/locations.dart';
 import '../../model/ride_pref/ride_pref.dart';
 import '../../service/ride_prefs_service.dart';
 import '../../theme/theme.dart';
@@ -23,8 +25,30 @@ class RidePrefScreen extends StatefulWidget {
 }
 
 class _RidePrefScreenState extends State<RidePrefScreen> {
+  Location? departureLocation;
+  Location? arrivalLocation;
   void onRidePrefSelected(RidePref ridePref) {
     // 1 - Navigate to the rides screen (with a buttom to top animation)
+  }
+
+  void setDepartureLocation() async {
+    final selectedDepartureLocation = await Navigator.push<Location>(
+      context,
+      MaterialPageRoute(builder: (context) => LocationSearchScreen()),
+    );
+    setState(() {
+      departureLocation = selectedDepartureLocation;
+    });
+  }
+
+  void setArrivalLocation() async {
+    final selectedArrivalLocation = await Navigator.push<Location>(
+      context,
+      MaterialPageRoute(builder: (context) => LocationSearchScreen()),
+    );
+    setState(() {
+      arrivalLocation = selectedArrivalLocation;
+    });
   }
 
   @override
@@ -61,12 +85,17 @@ class _RidePrefScreenState extends State<RidePrefScreen> {
         ),
         SizedBox(height: 100),
 
-        RideForm(),
-        
+        RideForm(
+          departureLocation: departureLocation,
+          arrivalLocation: arrivalLocation,
+          onDepartureTap: setDepartureLocation,
+          onArrivalTap: setArrivalLocation,
+        ),
+
         SizedBox(height: BlaSpacings.m),
         Expanded(
           child: ListView.builder(
-            padding: EdgeInsets.only(bottom: 40,),
+            padding: EdgeInsets.only(bottom: 40),
             shrinkWrap: true, // Fix ListView height issue
             physics: AlwaysScrollableScrollPhysics(),
             itemCount: RidePrefService.ridePrefsHistory.length,

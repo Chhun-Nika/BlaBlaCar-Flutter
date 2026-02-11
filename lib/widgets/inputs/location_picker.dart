@@ -3,22 +3,29 @@ import 'package:flutter/material.dart';
 
 import '../../model/ride/locations.dart';
 
-class LocationPicker extends StatelessWidget {
+class LocationPicker extends StatefulWidget {
   final String label;
-  final Location? seletedLocation;
+  final Location? selectedLocation;
   // adding callback function
+  final VoidCallback onTap;
 
-  const LocationPicker({super.key, required this.label, this.seletedLocation});
+  const LocationPicker({super.key, required this.label, this.selectedLocation, required this.onTap});
 
-  Color get labelColor =>
-      seletedLocation == null ? BlaColors.neutralLight : BlaColors.neutral;
+  @override
+  State<LocationPicker> createState() => _LocationPickerState();
+}
+
+class _LocationPickerState extends State<LocationPicker> {
+  Color get labelColor => widget.selectedLocation == null
+      ? BlaColors.neutralLight
+      : BlaColors.neutral;
+
+  String get title => widget.selectedLocation == null ? widget.label : widget.selectedLocation!.name;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap: () {
-        print("tapppp");
-      },
+      onTap: widget.onTap,
       contentPadding: EdgeInsets.all(0),
       leading: Container(
         width: 20,
@@ -29,7 +36,7 @@ class LocationPicker extends StatelessWidget {
           borderRadius: BorderRadius.circular(100),
         ),
       ),
-      title: Text(label, style: TextStyle(color: labelColor)),
+      title: Text(title, style: TextStyle(color: labelColor)),
     );
   }
 }
