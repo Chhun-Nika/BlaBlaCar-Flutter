@@ -16,7 +16,7 @@ class RideScreen extends StatelessWidget {
         children: [
           Container(
             margin: EdgeInsets.only(
-              top: BlaSpacings.s,
+              top: BlaSpacings.m,
               left: BlaSpacings.l,
               right: BlaSpacings.l,
             ),
@@ -34,13 +34,7 @@ class RideScreen extends StatelessWidget {
                   color: BlaColors.neutralLight,
                 ),
               ),
-              title: TextField(
-                cursorColor: BlaColors.primary,
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintStyle: TextStyle(color: BlaColors.neutralLighter),
-                ),
-              ),
+              title: Text("Ride Screen")
             ),
           ),
           Container(
