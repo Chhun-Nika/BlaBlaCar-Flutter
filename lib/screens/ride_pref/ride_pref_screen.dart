@@ -60,11 +60,13 @@ class _RidePrefScreenState extends State<RidePrefScreen> {
           style: BlaTextStyles.heading.copyWith(color: Colors.white),
         ),
         SizedBox(height: 100),
+
         RideForm(),
+        
         SizedBox(height: BlaSpacings.m),
         Expanded(
           child: ListView.builder(
-            padding: EdgeInsets.only(bottom: 40),
+            padding: EdgeInsets.only(bottom: 40,),
             shrinkWrap: true, // Fix ListView height issue
             physics: AlwaysScrollableScrollPhysics(),
             itemCount: RidePrefService.ridePrefsHistory.length,
