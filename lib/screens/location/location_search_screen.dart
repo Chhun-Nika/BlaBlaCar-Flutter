@@ -1,4 +1,3 @@
-import 'package:blabla/dummy_data/dummy_data.dart';
 import 'package:blabla/screens/location/widgets/location_tile.dart';
 import 'package:blabla/service/locations_service.dart';
 import 'package:blabla/theme/theme.dart';
@@ -55,7 +54,6 @@ class _LocationSearchScreenState extends State<LocationSearchScreen> {
     if (widget.defaultLocation != null) {
       _textController.text = widget.defaultLocation!.name;
     }
-    
   }
 
   @override
@@ -106,12 +104,14 @@ class _LocationSearchScreenState extends State<LocationSearchScreen> {
                     itemCount: filteredListLocation.length,
                     itemBuilder: (context, index) {
                       return LocationTile(
+                        onTap: () {
+                          Navigator.pop(context, filteredListLocation[index]);
+                        },
                         location: filteredListLocation[index],
                       );
                     },
                   ),
           ),
-          
         ],
       ),
     );

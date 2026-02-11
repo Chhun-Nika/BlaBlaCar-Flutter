@@ -7,19 +7,20 @@ import '../../../model/ride/locations.dart';
 class LocationTile extends StatelessWidget {
   // final bool isHistory;
   final Location location;
-  const LocationTile({super.key, required this.location});
+  final VoidCallback onTap;
+  const LocationTile({super.key, required this.location, required this.onTap});
 
   // Icon? get icon => isHistory == true ? Icon(Icons.history) : null;
   @override
   Widget build(BuildContext context) {
-    void onTapped() {
-      Navigator.pop<Location>(context, location);
-    }
 
     return Column(
       children: [
         ListTile(
-          contentPadding: EdgeInsets.symmetric(horizontal: BlaSpacings.l, vertical: BlaSpacings.s),
+          contentPadding: EdgeInsets.symmetric(
+            horizontal: BlaSpacings.l,
+            vertical: BlaSpacings.s,
+          ),
           // leading: icon,
           title: Text(
             location.name,
@@ -37,9 +38,7 @@ class LocationTile extends StatelessWidget {
             size: 30,
             color: BlaColors.neutralLight,
           ),
-          onTap: () {
-            onTapped();
-          },
+          onTap: onTap,
         ),
         Container(
           padding: EdgeInsets.symmetric(horizontal: BlaSpacings.l),
