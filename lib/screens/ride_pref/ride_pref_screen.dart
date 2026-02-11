@@ -1,4 +1,3 @@
-import 'package:blabla/screens/location/location_search_screen.dart';
 import 'package:blabla/widgets/inputs/ride_form.dart';
 import 'package:flutter/material.dart';
 
@@ -29,34 +28,6 @@ class _RidePrefScreenState extends State<RidePrefScreen> {
   Location? arrivalLocation;
   void onRidePrefSelected(RidePref ridePref) {
     // 1 - Navigate to the rides screen (with a buttom to top animation)
-  }
-
-  void setDepartureLocation() async {
-    final selectedDepartureLocation = await Navigator.push<Location>(
-      context,
-      MaterialPageRoute(builder: (context) => LocationSearchScreen()),
-    );
-    setState(() {
-      departureLocation = selectedDepartureLocation;
-    });
-  }
-
-  void setArrivalLocation() async {
-    final selectedArrivalLocation = await Navigator.push<Location>(
-      context,
-      MaterialPageRoute(builder: (context) => LocationSearchScreen()),
-    );
-    setState(() {
-      arrivalLocation = selectedArrivalLocation;
-    });
-  }
-
-  void onSwitchTap() {
-    final Location? tmpLocation = departureLocation;
-    setState(() {
-      departureLocation = arrivalLocation;
-      arrivalLocation = tmpLocation;
-    });
   }
 
   @override
@@ -93,13 +64,7 @@ class _RidePrefScreenState extends State<RidePrefScreen> {
         ),
         SizedBox(height: 100),
 
-        RideForm(
-          departureLocation: departureLocation,
-          arrivalLocation: arrivalLocation,
-          onDepartureTap: setDepartureLocation,
-          onArrivalTap: setArrivalLocation,
-          onSwitchTap: onSwitchTap,
-        ),
+        RideForm(),
 
         SizedBox(height: BlaSpacings.m),
         Expanded(

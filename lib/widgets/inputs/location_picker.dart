@@ -25,7 +25,7 @@ class LocationPicker extends StatelessWidget {
 
   String get title => selectedLocation == null ? label : selectedLocation!.name;
 
-  Icon? get switchIcon => isDeparturePicker == true
+  Icon? get switchIcon => isDeparturePicker && selectedLocation != null
       ? Icon(Icons.swap_vert_outlined, size: 26, color: BlaColors.primary)
       : null;
 

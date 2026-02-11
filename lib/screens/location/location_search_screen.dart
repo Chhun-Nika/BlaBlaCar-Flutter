@@ -49,6 +49,15 @@ class _LocationSearchScreenState extends State<LocationSearchScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    if (widget.defaultLocation != null) {
+      _textController.text = widget.defaultLocation!.name;
+    }
+    
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
@@ -87,11 +96,12 @@ class _LocationSearchScreenState extends State<LocationSearchScreen> {
                   )
                 : null,
           ),
+          if (_textController.text.isNotEmpty && filteredListLocation.isEmpty)
+            Text("No result found"),
           Expanded(
             child: filteredListLocation.isEmpty
                 ? SizedBox.shrink()
                 : ListView.builder(
-                    
                     itemCount: filteredListLocation.length,
                     itemBuilder: (context, index) {
                       return LocationTile(
@@ -100,6 +110,7 @@ class _LocationSearchScreenState extends State<LocationSearchScreen> {
                     },
                   ),
           ),
+          
         ],
       ),
     );
