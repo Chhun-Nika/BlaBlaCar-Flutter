@@ -14,6 +14,7 @@ class RideForm extends StatelessWidget {
   final int requestedSeat;
   final VoidCallback onDepartureTap;
   final VoidCallback onArrivalTap;
+  final VoidCallback onSwitchTap;
 
   RideForm({
     super.key,
@@ -23,6 +24,7 @@ class RideForm extends StatelessWidget {
     int? requestedSeat,
     required this.onDepartureTap,
     required this.onArrivalTap,
+    required this.onSwitchTap
   }) : date = date ?? DateTime.now(),
        requestedSeat = requestedSeat ?? 1;
 
@@ -53,7 +55,7 @@ class RideForm extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                LocationPicker(label: "Leaving from", onTap: onDepartureTap, selectedLocation: departureLocation,),
+                LocationPicker(isDeparturePicker: true,label: "Leaving from", onTap: onDepartureTap, selectedLocation: departureLocation, onSwitchTap: onSwitchTap,),
                 BlaDivider(),
                 LocationPicker(label: "Going to", onTap: onArrivalTap, selectedLocation: arrivalLocation,),
                 BlaDivider(),

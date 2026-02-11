@@ -51,6 +51,14 @@ class _RidePrefScreenState extends State<RidePrefScreen> {
     });
   }
 
+  void onSwitchTap() {
+    final Location? tmpLocation = departureLocation;
+    setState(() {
+      departureLocation = arrivalLocation;
+      arrivalLocation = tmpLocation;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -90,6 +98,7 @@ class _RidePrefScreenState extends State<RidePrefScreen> {
           arrivalLocation: arrivalLocation,
           onDepartureTap: setDepartureLocation,
           onArrivalTap: setArrivalLocation,
+          onSwitchTap: onSwitchTap,
         ),
 
         SizedBox(height: BlaSpacings.m),
