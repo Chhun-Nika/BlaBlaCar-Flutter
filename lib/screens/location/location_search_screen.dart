@@ -1,5 +1,6 @@
 import 'package:blabla/dummy_data/dummy_data.dart';
 import 'package:blabla/screens/location/widgets/location_tile.dart';
+import 'package:blabla/service/locations_service.dart';
 import 'package:blabla/theme/theme.dart';
 import 'package:flutter/material.dart';
 
@@ -24,7 +25,7 @@ class _LocationSearchScreenState extends State<LocationSearchScreen> {
     if (_textController.text.isEmpty) {
       return result;
     }
-    return fakeLocations
+    return LocationsService.availableLocations
         .where(
           (l) =>
               l.name.toLowerCase().contains(
