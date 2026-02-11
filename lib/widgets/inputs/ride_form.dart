@@ -1,5 +1,6 @@
 import 'package:blabla/model/ride_pref/ride_pref.dart';
 import 'package:blabla/screens/ride/ride_screen.dart';
+import 'package:blabla/screens/select_seats_number/select_seats_number_screen.dart';
 import 'package:blabla/theme/theme.dart';
 import 'package:blabla/utils/animations_util.dart';
 import 'package:blabla/widgets/actions/bla_button.dart';
@@ -70,6 +71,19 @@ class _RideFormState extends State<RideForm> {
     });
   }
 
+  Future<void> setRequestedSeats() async {
+    final newRequestedSeats = await Navigator.push(
+      context,
+      AnimationUtils.createBottomToTopRoute(
+        SelectSeatsNumberScreen(requestedSeat: requestedSeat),
+      ),
+    );
+
+    setState(() {
+      requestedSeat = newRequestedSeats;
+    });
+  }
+
   void onSwitchTap() {
     final Location? tmpLocation = departureLocation;
     setState(() {
@@ -92,9 +106,7 @@ class _RideFormState extends State<RideForm> {
       );
       await Navigator.push(
         context,
-        MaterialPageRoute(
-          builder: (context) => RideScreen(ridePref: ridePref),
-        ),
+        MaterialPageRoute(builder: (context) => RideScreen(ridePref: ridePref)),
       );
     }
   }
@@ -146,7 +158,10 @@ class _RideFormState extends State<RideForm> {
                 BlaDivider(),
                 DatePicker(date: date),
                 BlaDivider(),
-                RequestedSeatInput(requestedSeat: requestedSeat),
+                RequestedSeatInput(
+                  requestedSeat: requestedSeat,
+                  onTap: setRequestedSeats,
+                ),
               ],
             ),
           ),

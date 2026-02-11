@@ -3,15 +3,14 @@ import 'package:flutter/material.dart';
 
 class RequestedSeatInput extends StatelessWidget {
   final int requestedSeat;
+  final VoidCallback onTap;
   // adding call back function
-  const RequestedSeatInput({super.key, required this.requestedSeat});
+  const RequestedSeatInput({super.key, required this.requestedSeat, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap: () {
-        print("hii");
-      },
+      onTap: onTap,
       contentPadding: EdgeInsets.all(0),
       leading: Icon(Icons.person_outline, color: BlaColors.neutralLight),
       title: Text(
