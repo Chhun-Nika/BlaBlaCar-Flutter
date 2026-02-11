@@ -1,4 +1,5 @@
 import 'package:blabla/model/ride_pref/ride_pref.dart';
+import 'package:blabla/screens/ride/ride_screen.dart';
 import 'package:blabla/theme/theme.dart';
 import 'package:blabla/utils/animations_util.dart';
 import 'package:blabla/widgets/actions/bla_button.dart';
@@ -43,7 +44,9 @@ class _RideFormState extends State<RideForm> {
       //     defaultLocation: departureLocation,
       //   ),
       // ),
-      AnimationUtils.createBottomToTopRoute(LocationSearchScreen(defaultLocation: departureLocation,))
+      AnimationUtils.createBottomToTopRoute(
+        LocationSearchScreen(defaultLocation: departureLocation),
+      ),
     );
     setState(() {
       departureLocation = selectedDepartureLocation;
@@ -58,7 +61,9 @@ class _RideFormState extends State<RideForm> {
       //       LocationSearchScreen(defaultLocation: arrivalLocation),
       // ),
       // apply animation
-      AnimationUtils.createBottomToTopRoute(LocationSearchScreen(defaultLocation: arrivalLocation,))
+      AnimationUtils.createBottomToTopRoute(
+        LocationSearchScreen(defaultLocation: arrivalLocation),
+      ),
     );
     setState(() {
       arrivalLocation = selectedArrivalLocation;
@@ -71,6 +76,27 @@ class _RideFormState extends State<RideForm> {
       departureLocation = arrivalLocation;
       arrivalLocation = tmpLocation;
     });
+  }
+
+  void onSearch() async {
+    if (departureLocation == null) {
+      setDepartureLocation();
+    } else if (arrivalLocation == null) {
+      setArrivalLocation();
+    } else {
+      final ridePref = RidePref(
+        departure: departureLocation!,
+        departureDate: date,
+        arrival: arrivalLocation!,
+        requestedSeats: requestedSeat,
+      );
+      await Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => RideScreen(ridePref: ridePref),
+        ),
+      );
+    }
   }
 
   @override
@@ -125,7 +151,7 @@ class _RideFormState extends State<RideForm> {
             ),
           ),
           BlaButton(
-            onClicked: () {},
+            onClicked: onSearch,
             buttonLabel: "Search",
             buttonType: ButtonType.primary,
             isSearchBtn: true,

@@ -61,39 +61,42 @@ class _LocationSearchScreenState extends State<LocationSearchScreen> {
     return Scaffold(
       body: Column(
         children: [
-          ListTile(
-            contentPadding: EdgeInsets.symmetric(horizontal: BlaSpacings.m),
-            leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: Icon(
-                Icons.chevron_left_rounded,
-                size: 30,
-                color: BlaColors.neutralLight,
+          Container(
+            margin: EdgeInsets.only(top: BlaSpacings.s, left: BlaSpacings.m, right: BlaSpacings.xl),
+            child: ListTile(
+              contentPadding: EdgeInsets.all(0),
+              leading: IconButton(
+                onPressed: () {
+                  Navigator.pop(context, widget.defaultLocation);
+                },
+                icon: Icon(
+                  Icons.chevron_left_rounded,
+                  size: 30,
+                  color: BlaColors.neutralLight,
+                ),
               ),
-            ),
-            title: TextField(
-              controller: _textController,
-              cursorColor: BlaColors.primary,
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                hintText: "Station Road or the Bridge Cafe",
-                hintStyle: TextStyle(color: BlaColors.neutralLighter),
+              title: TextField(
+                controller: _textController,
+                cursorColor: BlaColors.primary,
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: "Station Road or the Bridge Cafe",
+                  hintStyle: TextStyle(color: BlaColors.neutralLighter),
+                ),
+                onChanged: (_) {
+                  setState(() {});
+                },
               ),
-              onChanged: (_) {
-                setState(() {});
-              },
+              trailing: _textController.text.isNotEmpty
+                  ? IconButton(
+                      onPressed: clearSearchBar,
+                      icon: Icon(
+                        Icons.clear_rounded,
+                        color: BlaColors.neutralLight,
+                      ),
+                    )
+                  : null,
             ),
-            trailing: _textController.text.isNotEmpty
-                ? IconButton(
-                    onPressed: clearSearchBar,
-                    icon: Icon(
-                      Icons.clear_rounded,
-                      color: BlaColors.neutralLight,
-                    ),
-                  )
-                : null,
           ),
           if (_textController.text.isNotEmpty && filteredListLocation.isEmpty)
             Text("No result found"),
