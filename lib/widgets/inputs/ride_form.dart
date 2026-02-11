@@ -34,7 +34,7 @@ class _RideFormState extends State<RideForm> {
     requestedSeat = widget.ridePref?.requestedSeats ?? 1;
   }
 
-  void setDepartureLocation() async {
+  Future<void> setDepartureLocation() async {
     final selectedDepartureLocation = await Navigator.push<Location>(
       context,
       MaterialPageRoute(
@@ -48,7 +48,7 @@ class _RideFormState extends State<RideForm> {
     });
   }
 
-  void setArrivalLocation() async {
+  Future<void> setArrivalLocation() async {
     final selectedArrivalLocation = await Navigator.push<Location>(
       context,
       MaterialPageRoute(
