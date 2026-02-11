@@ -1,5 +1,6 @@
 import 'package:blabla/model/ride_pref/ride_pref.dart';
 import 'package:blabla/theme/theme.dart';
+import 'package:blabla/utils/animations_util.dart';
 import 'package:blabla/widgets/actions/bla_button.dart';
 import 'package:blabla/widgets/display/bla_divider.dart';
 import 'package:blabla/widgets/inputs/location_picker.dart';
@@ -37,11 +38,12 @@ class _RideFormState extends State<RideForm> {
   Future<void> setDepartureLocation() async {
     final selectedDepartureLocation = await Navigator.push<Location>(
       context,
-      MaterialPageRoute(
-        builder: (context) => LocationSearchScreen(
-          defaultLocation: departureLocation,
-        ),
-      ),
+      // MaterialPageRoute(
+      //   builder: (context) => LocationSearchScreen(
+      //     defaultLocation: departureLocation,
+      //   ),
+      // ),
+      AnimationUtils.createBottomToTopRoute(LocationSearchScreen(defaultLocation: departureLocation,))
     );
     setState(() {
       departureLocation = selectedDepartureLocation;
@@ -51,10 +53,12 @@ class _RideFormState extends State<RideForm> {
   Future<void> setArrivalLocation() async {
     final selectedArrivalLocation = await Navigator.push<Location>(
       context,
-      MaterialPageRoute(
-        builder: (context) =>
-            LocationSearchScreen(defaultLocation: arrivalLocation),
-      ),
+      // MaterialPageRoute(
+      //   builder: (context) =>
+      //       LocationSearchScreen(defaultLocation: arrivalLocation),
+      // ),
+      // apply animation
+      AnimationUtils.createBottomToTopRoute(LocationSearchScreen(defaultLocation: arrivalLocation,))
     );
     setState(() {
       arrivalLocation = selectedArrivalLocation;
