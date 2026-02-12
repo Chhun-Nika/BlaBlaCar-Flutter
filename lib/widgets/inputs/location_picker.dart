@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../../model/ride/locations.dart';
 
 class LocationPicker extends StatelessWidget {
-  final bool isDeparturePicker;
+  final bool isSwitchIconVisible;
   final String label;
   final Location? selectedLocation;
   // adding callback function
@@ -13,19 +13,19 @@ class LocationPicker extends StatelessWidget {
 
   const LocationPicker({
     super.key,
-    bool? isDeparturePicker,
+    bool? isSwitchIconVisible,
     required this.label,
     this.selectedLocation,
     required this.onTap,
     this.onSwitchTap
-  }) : isDeparturePicker = isDeparturePicker ?? false;
+  }) : isSwitchIconVisible = isSwitchIconVisible ?? false;
 
   Color get labelColor =>
       selectedLocation == null ? BlaColors.neutralLight : BlaColors.neutral;
 
   String get title => selectedLocation == null ? label : selectedLocation!.name;
 
-  Icon? get switchIcon => isDeparturePicker && selectedLocation != null
+  Icon? get switchIcon => isSwitchIconVisible
       ? Icon(Icons.swap_vert_outlined, size: 26, color: BlaColors.primary)
       : null;
 

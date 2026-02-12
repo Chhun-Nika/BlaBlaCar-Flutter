@@ -1,4 +1,5 @@
 import 'package:blabla/model/ride_pref/ride_pref.dart';
+import 'package:blabla/screens/date/date_picker_screen.dart';
 import 'package:blabla/screens/ride/ride_screen.dart';
 import 'package:blabla/screens/select_seats_number/select_seats_number_screen.dart';
 import 'package:blabla/theme/theme.dart';
@@ -84,12 +85,26 @@ class _RideFormState extends State<RideForm> {
     });
   }
 
+  void setDate() async {
+    final newDate = await Navigator.push(
+      context,
+      AnimationUtils.createBottomToTopRoute(DatePickerScreen(date: date)),
+    );
+  }
+
   void onSwitchTap() {
     final Location? tmpLocation = departureLocation;
     setState(() {
       departureLocation = arrivalLocation;
       arrivalLocation = tmpLocation;
     });
+  }
+
+  bool isSwitchIconVisible() {
+    if (departureLocation != null || arrivalLocation != null) {
+      return true;
+    }
+    return false;
   }
 
   void onSearch() async {
@@ -143,7 +158,7 @@ class _RideFormState extends State<RideForm> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 LocationPicker(
-                  isDeparturePicker: true,
+                  isSwitchIconVisible: isSwitchIconVisible(),
                   label: "Leaving from",
                   onTap: setDepartureLocation,
                   selectedLocation: departureLocation,
@@ -156,7 +171,7 @@ class _RideFormState extends State<RideForm> {
                   selectedLocation: arrivalLocation,
                 ),
                 BlaDivider(),
-                DatePicker(date: date),
+                DatePicker(date: date, onTap: setDate),
                 BlaDivider(),
                 RequestedSeatInput(
                   requestedSeat: requestedSeat,

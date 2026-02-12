@@ -37,7 +37,9 @@ class _SelectSeatsNumberScreenState extends State<SelectSeatsNumberScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pop(context, requestedSeat);
+              },
               icon: Icon(
                 Icons.clear_rounded,
                 size: 30,
